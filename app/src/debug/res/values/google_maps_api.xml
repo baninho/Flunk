@@ -1,0 +1,24 @@
+<resources>
+    <!--
+    TODO: Before you run your application, you need a Google Maps API key.
+
+    To get one, follow this link, follow the directions and press "Create" at the end:
+
+    https://console.developers.google.com/flows/enableapi?apiid=maps_android_backend&keyType=CLIENT_SIDE_ANDROID&r=A0:50:11:19:D0:3B:CE:31:DC:75:6A:53:ED:55:55:1F:D9:19:37:00%3Bdev.baninho.flunk
+
+    You can also add your credentials to an existing key, using these values:
+
+    Package name:
+    dev.baninho.flunk
+
+    SHA-1 certificate fingerprint:
+    A0:50:11:19:D0:3B:CE:31:DC:75:6A:53:ED:55:55:1F:D9:19:37:00
+
+    Alternatively, follow the directions here:
+    https://developers.google.com/maps/documentation/android/start#get-key
+
+    Once you have your key (it starts with "AIza"), replace the "google_maps_key"
+    string in this file.
+    -->
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">AIzaSyBytUHDBkWw3ukVIP58K1-Pk3EE6x5ikpk</string>
+</resources>

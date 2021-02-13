@@ -2,9 +2,7 @@ package dev.baninho.flunk.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.CountDownTimer
 import android.util.Log
-import androidx.lifecycle.Observer
 import com.google.android.gms.maps.*
 
 import com.google.android.gms.maps.model.LatLng
@@ -12,11 +10,10 @@ import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MarkerOptions
 import dev.baninho.flunk.R
 import dev.baninho.flunk.dto.Court
-import kotlin.math.pow
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
-    private var padding: Int = 200
+    private val padding: Int = 200
 
     private lateinit var courts: List<Court>
     private lateinit var mMap: GoogleMap
@@ -51,13 +48,13 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private fun updateMap() {
         mMap.clear()
-        val markers: ArrayList<MarkerOptions> = ArrayList<MarkerOptions>()
+        val markers: ArrayList<MarkerOptions> = ArrayList()
         var minLat = 90.0
         var maxLat = -90.0
         var minLng = 180.0
         var maxLng = -180.0
         courts.forEach { court ->
-            if (court.latitude.isNotEmpty() && court.longitude.isNotEmpty()) {
+            if (court.isActive && court.latitude.isNotEmpty() && court.longitude.isNotEmpty()) {
                 val marker = MarkerOptions().position(LatLng(court.latitude.toDouble(), court.longitude.toDouble()))
                 marker.title(court.toString())
                 markers.add(marker)

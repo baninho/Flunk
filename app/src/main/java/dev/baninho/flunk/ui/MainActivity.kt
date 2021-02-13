@@ -46,10 +46,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun saveCourt() {
         var court = Court().apply {
-            owner = userId
+            ownerId = userId
             latitude = lblLatitudeValue.text.toString()
             longitude = lblLongitudeValue.text.toString()
-            active = true
+            isActive = true
             players = playercount
             capacity = lblCapacity.text.toString().toInt()
         }

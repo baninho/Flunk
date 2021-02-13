@@ -1,29 +1,30 @@
 # Flunk.app
 ## Thoughts, concepts, functions
 ### User 
-    - Übergreifend
-        - Festivalbesucher
-        - 18-28
-        - digitalaffin
-        - besoffen
-        - nachhaltigkeitsorientiert
-            - CO2 Ausgleich
-        - Vielleicht politisch aktiv
-        - Wenig Akku
-        - Wenig Empfang
-            - Lokale Datenbank und Synchronisierung bei Gelegenheit
-            - Robust bei schlechtem Netz, ggf. Hinweis auf schlechte Verbindung
-        - Nach dem Spielen hungrig
-        - Überwiegend Android, weniger iPhone
-        
-    - Einzelspieler
-        - Zurückhaltend
-        - kontaktsuchend
-        - Vielleicht nicht ganz so besoffen
-    - Team
-        - wettebewerbsorientiert
-        - Zusammengehörigkeit
-        - Siegeswillen
+#### Übergreifend
+- Festivalbesucher
+- 18-28
+- digitalaffin
+- besoffen
+- nachhaltigkeitsorientiert
+    - CO2 Ausgleich
+- Vielleicht politisch aktiv
+- Wenig Akku
+- Wenig Empfang
+    - Lokale Datenbank und Synchronisierung bei Gelegenheit
+    - Robust bei schlechtem Netz, ggf. Hinweis auf schlechte Verbindung
+- Nach dem Spielen hungrig
+- Überwiegend Android, weniger iPhone
+    
+#### Einzelspieler
+- Zurückhaltend
+- kontaktsuchend
+- Vielleicht nicht ganz so besoffen
+
+#### Team
+- wettebewerbsorientiert
+- Zusammengehörigkeit
+- Siegeswillen
         
 ***
 

@@ -64,7 +64,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             }
         }
         markers.forEach {
-                marker ->
+            marker ->
             if (minLat > marker.position.latitude) { minLat = marker.position.latitude }
             if (maxLat < marker.position.latitude) { maxLat = marker.position.latitude }
             if (minLng > marker.position.longitude) { minLng = marker.position.longitude }

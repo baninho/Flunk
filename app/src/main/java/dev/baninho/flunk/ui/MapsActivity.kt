@@ -2,6 +2,8 @@ package dev.baninho.flunk.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.CountDownTimer
+import androidx.lifecycle.Observer
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -10,10 +12,13 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import dev.baninho.flunk.R
+import dev.baninho.flunk.dto.Court
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
+    private lateinit var courts: List<Court>
     private lateinit var mMap: GoogleMap
+    private lateinit var mainViewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,10 +40,22 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
      */
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
+        mainViewModel = MainViewModel()
+        mainViewModel.courts.observe(this, Observer {
+            courts -> this.courts = courts
+            updateMap()
+        })
+    }
 
-        // Add a marker in Sydney and move the camera
-        val sydney = LatLng(-34.0, 151.0)
-        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+    private fun updateMap() {
+        if (courts != null) {
+            mMap.clear()
+            courts.forEach { court ->
+                if (court.latitude.isNotEmpty() && court.longitude.isNotEmpty()) {
+                    val marker = LatLng(court.latitude.toDouble(), court.longitude.toDouble())
+                    mMap.addMarker(MarkerOptions().position(marker).title(court.toString()))
+                }
+            }
+        }
     }
 }

@@ -16,7 +16,7 @@ import kotlin.math.pow
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
-    private var padding: Int = 10
+    private var padding: Int = 200
 
     private lateinit var courts: List<Court>
     private lateinit var mMap: GoogleMap
@@ -52,10 +52,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private fun updateMap() {
         mMap.clear()
         val markers: ArrayList<MarkerOptions> = ArrayList<MarkerOptions>()
-        var minLat = 53.0
-        var maxLat = 53.5
-        var minLng = 9.0
-        var maxLng = 10.0
+        var minLat = 90.0
+        var maxLat = -90.0
+        var minLng = 180.0
+        var maxLng = -180.0
         courts.forEach { court ->
             if (court.latitude.isNotEmpty() && court.longitude.isNotEmpty()) {
                 val marker = MarkerOptions().position(LatLng(court.latitude.toDouble(), court.longitude.toDouble()))

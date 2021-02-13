@@ -28,6 +28,8 @@ class MainActivity : AppCompatActivity() {
         mapButton = findViewById(R.id.mapButton)
         enlistButton = findViewById(R.id.enlistButton)
         lblCapacity = findViewById(R.id.courtCapacity)
+        lblLatitudeValue = findViewById(R.id.courtLatitude)
+        lblLongitudeValue = findViewById(R.id.courtLongitude)
 
         mapButton.setOnClickListener {
             val intent = Intent(this, MapsActivity::class.java)

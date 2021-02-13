@@ -7,5 +7,7 @@ data class Court(var owner: String = "",
                  var players: Int = 0,
                  var capacity: Int = 0
 ) {
-
+    override fun toString(): String{
+        return "$owner's Spielfeld "
+    }
 }

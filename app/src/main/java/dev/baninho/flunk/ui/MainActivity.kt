@@ -16,6 +16,7 @@ class MainActivity : AppCompatActivity() {
     private var mainViewModel: MainViewModel = MainViewModel()
 
     private lateinit var mapButton: Button
+    private lateinit var enlistButton: Button
     private lateinit var lblLatitudeValue: TextView
     private lateinit var lblLongitudeValue: TextView
     private lateinit var lblCapacity: TextView
@@ -25,9 +26,17 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         mapButton = findViewById(R.id.mapButton)
+        enlistButton = findViewById(R.id.enlistButton)
         lblCapacity = findViewById(R.id.courtCapacity)
 
         mapButton.setOnClickListener {
+            val intent = Intent(this, MapsActivity::class.java)
+            startActivity(intent)
+        }
+
+        enlistButton.setOnClickListener {
+            saveCourt()
+
             val intent = Intent(this, MapsActivity::class.java)
             startActivity(intent)
         }

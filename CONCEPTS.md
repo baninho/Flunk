@@ -17,8 +17,8 @@
 - Überwiegend Android, weniger iPhone
     
 #### Einzelspieler
-- Zurückhaltend
-- kontaktsuchend
+- Zurückhaltend aber kontaktsuchend
+    - für Kontaktfreudige eher geringer Nutzen
 - Vielleicht nicht ganz so besoffen
 
 #### Team

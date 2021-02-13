@@ -1,7 +1,6 @@
 # Flunk.app
 ## Thoughts, concepts, functions
-***
-###User 
+### User 
     - Übergreifend
         - Festivalbesucher
         - 18-28
@@ -28,7 +27,7 @@
         
 ***
 
-###Concepts
+### Concepts
 
 ***
 
@@ -49,5 +48,5 @@
 
 ***
 
-###Behaviour
+### Behaviour
 - Als potenzieller Spieler beim Betreten eines Flunkyballfelds fragt mich die App, ob ich hier dem Spielfeld beitreten

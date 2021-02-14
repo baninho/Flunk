@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
@@ -13,6 +14,7 @@ import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import dev.baninho.flunk.R
 import dev.baninho.flunk.dto.Court
+import kotlin.math.log
 
 class MainActivity : AppCompatActivity() {
 
@@ -21,6 +23,7 @@ class MainActivity : AppCompatActivity() {
     private val userId: String = ""
 
     private var mainViewModel: MainViewModel = MainViewModel()
+    private var locationPermissionGranted: Boolean = false
 
     private lateinit var locationViewModel: LocationViewModel
     private lateinit var mapButton: Button
@@ -47,17 +50,18 @@ class MainActivity : AppCompatActivity() {
 
         enlistButton.setOnClickListener {
             lblCapacity.setTextColor(Color.BLACK)
+            checkLocationPermission()
             if (saveCourt()) {
                 val intent = Intent(this, MapsActivity::class.java)
                 startActivity(intent)
             }
         }
 
-        prepRequestLocationUpdates()
+        checkLocationPermission()
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
-    private fun prepRequestLocationUpdates() {
+    fun checkLocationPermission() {
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             requestLocationUpdates()
         } else {
@@ -67,7 +71,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun requestLocationUpdates() {
-        locationViewModel = LocationViewModel(this.application)
+        locationViewModel = LocationViewModel(this)
         locationViewModel.getLocationLiveData().observe(this, {
             lblLatitudeValue.text = it.latitude
             lblLongitudeValue.text = it.longitude
@@ -84,7 +88,10 @@ class MainActivity : AppCompatActivity() {
             LOCATION_PERMISSION_REQUEST_CODE -> {
                 if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     requestLocationUpdates()
+                    locationPermissionGranted = true
+                    Log.d("Location", "Permission granted")
                 } else {
+                    Log.d("Location", "Permission denied")
                     Toast.makeText(this, "Unable to update location without permission", Toast.LENGTH_LONG)
                 }
             }

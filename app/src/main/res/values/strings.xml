@@ -2,10 +2,11 @@
     <string name="app_name">Flunk</string>
     <string name="title_activity_maps">Map</string>
     <string name="map_button_text">Map</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="capacityText">Capacity</string>
+    <string name="capacityText">10</string>
     <string name="enlistButtonText">Spielfeld anmelden</string>
     <string name="courtLongitudeText">9.528811643662427</string>
     <string name="courtLatitudeText">53.14636780765989</string>
+    <string name="lblCap">Max. Players</string>
+    <string name="lblLat">Latitude</string>
+    <string name="lblLng">Longitude</string>
 </resources>

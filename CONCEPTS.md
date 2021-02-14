@@ -29,6 +29,18 @@
 ***
 
 ### Concepts
+#### Basic Concept
+Jeder kann Flunkyballfelder in der App auf der Karte sehen. Wenn ein Spieler sich zu einem Flunkyballfeld begibt, wird er aufgefordert dem Spiel auch in der App beizutreten, um die Aktivität der Flunkyballfelder abbilden zu können. Befinden sich in der Nähe keine Flunkyballfelder mit freien Plätzen oder insgesamt nur wenige freie Spielerplätze, kann jeder ein neues Flunkyballfeld erstellen.
+
+#### Teams
+
+#### Tournaments
+
+#### Recruiting
+
+#### Networking
+
+#### Utilities
 
 ***
 

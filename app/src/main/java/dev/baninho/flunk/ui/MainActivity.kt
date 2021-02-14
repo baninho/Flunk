@@ -1,6 +1,7 @@
 package dev.baninho.flunk.ui
 
 import android.content.Intent
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -37,22 +38,29 @@ class MainActivity : AppCompatActivity() {
         }
 
         enlistButton.setOnClickListener {
-            saveCourt()
-
-            val intent = Intent(this, MapsActivity::class.java)
-            startActivity(intent)
+            lblCapacity.setTextColor(Color.BLACK)
+            if (saveCourt()) {
+                val intent = Intent(this, MapsActivity::class.java)
+                startActivity(intent)
+            }
         }
     }
 
-    private fun saveCourt() {
-        var court = Court().apply {
+    private fun saveCourt(): Boolean {
+        val capacity = lblCapacity.text.toString().toIntOrNull()
+        if (capacity == null) {
+            lblCapacity.setTextColor(Color.RED)
+            return false
+        }
+        val court = Court().apply {
             ownerId = userId
             latitude = lblLatitudeValue.text.toString()
             longitude = lblLongitudeValue.text.toString()
             isActive = true
             players = playercount
-            capacity = lblCapacity.text.toString().toInt()
+            this.capacity = capacity
         }
         mainViewModel.save(court)
+        return true
     }
 }

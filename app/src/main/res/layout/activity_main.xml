@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:importantForAutofill="no"
-        android:inputType="textPersonName"
+        android:inputType="number"
         android:text="@string/capacityText"
         app:layout_constraintBottom_toTopOf="@+id/enlistButton"
         app:layout_constraintEnd_toEndOf="parent"

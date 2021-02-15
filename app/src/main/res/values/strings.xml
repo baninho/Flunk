@@ -9,4 +9,7 @@
     <string name="lblCap">Max. Players</string>
     <string name="lblLat">Latitude</string>
     <string name="lblLng">Longitude</string>
+    <string name="msgJoinCourtDialog">Hier mitspielen?</string>
+    <string name="btnJoinText">Klar.</string>
+    <string name="btnCancelJoinCourt">Jetzt nicht</string>
 </resources>

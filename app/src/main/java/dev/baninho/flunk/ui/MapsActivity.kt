@@ -44,11 +44,14 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             courts -> this.courts = courts
             updateMap()
         })
+        mMap.setOnInfoWindowClickListener {
+            val joinDialogFragment = JoinCourtDialog(it)
+            joinDialogFragment.show(supportFragmentManager, "joinCourt")
+        }
     }
 
     private fun updateMap() {
         mMap.clear()
-        val markers: ArrayList<MarkerOptions> = ArrayList()
         var minLat = 90.0
         var maxLat = -90.0
         var minLng = 180.0
@@ -57,17 +60,13 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             if (court.isActive && court.latitude.isNotEmpty() && court.longitude.isNotEmpty()) {
                 val marker = MarkerOptions().position(LatLng(court.latitude.toDouble(), court.longitude.toDouble()))
                 marker.title(court.toString())
-                marker.snippet("${court.players}/${court.capacity} Spieler")
-                markers.add(marker)
+                marker.snippet("${court.players}/${court.capacity} Spieler. Zum Beitreten klicken")
+                if (minLat > marker.position.latitude) { minLat = marker.position.latitude }
+                if (maxLat < marker.position.latitude) { maxLat = marker.position.latitude }
+                if (minLng > marker.position.longitude) { minLng = marker.position.longitude }
+                if (maxLng < marker.position.longitude) { maxLng = marker.position.longitude }
+                mMap.addMarker(marker).tag = court
             }
-        }
-        markers.forEach {
-            marker ->
-            if (minLat > marker.position.latitude) { minLat = marker.position.latitude }
-            if (maxLat < marker.position.latitude) { maxLat = marker.position.latitude }
-            if (minLng > marker.position.longitude) { minLng = marker.position.longitude }
-            if (maxLng < marker.position.longitude) { maxLng = marker.position.longitude }
-            mMap.addMarker(marker)
         }
         val bounds = LatLngBounds(LatLng(minLat, minLng), LatLng(maxLat, maxLng))
         val update: CameraUpdate = CameraUpdateFactory.newLatLngBounds(bounds, padding)

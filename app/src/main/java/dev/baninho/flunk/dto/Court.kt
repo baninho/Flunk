@@ -15,12 +15,4 @@ data class Court(var owner: String = "",
     override fun toString(): String{
         return "$owner's Spielfeld "
     }
-
-    fun save(firestore: FirebaseFirestore) {
-        firestore.collection("courts")
-            .document()
-            .set(this)
-            .addOnSuccessListener { Log.d("Firebase", "document saved") }
-            .addOnFailureListener { Log.d("Firebase", "saveCourt failed") }
-    }
 }

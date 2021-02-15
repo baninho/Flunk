@@ -14,9 +14,11 @@ class MainViewModel: ViewModel() {
     private var _courts: MutableLiveData<ArrayList<Court>> = MutableLiveData<ArrayList<Court>>()
 
     fun saveCourt(court: Court) {
-
-        court.save(firestore)
-
+        firestore.collection("courts")
+            .document()
+            .set(court)
+            .addOnSuccessListener { Log.d("Firebase", "document saved") }
+            .addOnFailureListener { Log.d("Firebase", "saveCourt failed") }
     }
 
     init {

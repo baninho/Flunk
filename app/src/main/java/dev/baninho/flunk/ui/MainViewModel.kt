@@ -13,12 +13,12 @@ class MainViewModel: ViewModel() {
     private var firestore: FirebaseFirestore = FirebaseFirestore.getInstance()
     private var _courts: MutableLiveData<ArrayList<Court>> = MutableLiveData<ArrayList<Court>>()
 
-    fun save(court: Court) {
+    fun saveCourt(court: Court) {
         firestore.collection("courts")
             .document()
             .set(court)
             .addOnSuccessListener { Log.d("Firebase", "document saved") }
-            .addOnFailureListener { Log.d("Firebase", "save failed") }
+            .addOnFailureListener { Log.d("Firebase", "saveCourt failed") }
     }
 
     init {

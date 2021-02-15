@@ -14,7 +14,6 @@ import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import dev.baninho.flunk.R
 import dev.baninho.flunk.dto.Court
-import kotlin.math.log
 
 class MainActivity : AppCompatActivity() {
 
@@ -113,7 +112,7 @@ class MainActivity : AppCompatActivity() {
             players = playercount
             this.capacity = capacity
         }
-        mainViewModel.save(court)
+        mainViewModel.saveCourt(court)
         return true
     }
 }

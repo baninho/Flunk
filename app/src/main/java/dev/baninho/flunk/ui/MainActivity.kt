@@ -92,7 +92,8 @@ class MainActivity : AppCompatActivity() {
                     Log.d("Location", "Permission granted")
                 } else {
                     Log.d("Location", "Permission denied")
-                    Toast.makeText(this, "Unable to update location without permission", Toast.LENGTH_LONG)
+                    Toast.makeText(this,
+                        "Unable to update location without permission", Toast.LENGTH_LONG).show()
                 }
             }
         }

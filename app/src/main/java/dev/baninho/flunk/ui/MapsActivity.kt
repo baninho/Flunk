@@ -57,6 +57,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             if (court.isActive && court.latitude.isNotEmpty() && court.longitude.isNotEmpty()) {
                 val marker = MarkerOptions().position(LatLng(court.latitude.toDouble(), court.longitude.toDouble()))
                 marker.title(court.toString())
+                marker.snippet("${court.players}/${court.capacity} Spieler")
                 markers.add(marker)
             }
         }

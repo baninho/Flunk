@@ -13,4 +13,6 @@
     <string name="btnJoinText">Klar.</string>
     <string name="btnCancelJoinCourt">Jetzt nicht</string>
     <string name="btnLoginText">Login</string>
+    <string name="facebook_app_id">254782016175692</string>
+    <string name="fb_login_protocol_scheme">fb254782016175692</string>
 </resources>

@@ -12,12 +12,17 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
+import com.firebase.ui.auth.AuthUI
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import dev.baninho.flunk.R
 import dev.baninho.flunk.dto.Court
 
 class MainActivity : AppCompatActivity() {
 
+    private var user: FirebaseUser? = null
     private val LOCATION_PERMISSION_REQUEST_CODE: Int = 2000
+    private val AUTH_REQUEST_CODE: Int = 2002
     private val playercount: Int = 0
     private val userId: String = ""
 
@@ -25,8 +30,9 @@ class MainActivity : AppCompatActivity() {
     private var locationPermissionGranted: Boolean = false
 
     private lateinit var locationViewModel: LocationViewModel
-    private lateinit var mapButton: Button
-    private lateinit var enlistButton: Button
+    private lateinit var btnMap: Button
+    private lateinit var btnEnlist: Button
+    private lateinit var btnLogin: Button
     private lateinit var lblLatitudeValue: TextView
     private lateinit var lblLongitudeValue: TextView
     private lateinit var lblCapacity: TextView
@@ -36,18 +42,19 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        mapButton = findViewById(R.id.mapButton)
-        enlistButton = findViewById(R.id.enlistButton)
+        btnMap = findViewById(R.id.mapButton)
+        btnEnlist = findViewById(R.id.enlistButton)
+        btnLogin = findViewById(R.id.btnLogin)
         lblCapacity = findViewById(R.id.courtCapacity)
         lblLatitudeValue = findViewById(R.id.courtLatitude)
         lblLongitudeValue = findViewById(R.id.courtLongitude)
 
-        mapButton.setOnClickListener {
+        btnMap.setOnClickListener {
             val intent = Intent(this, MapsActivity::class.java)
             startActivity(intent)
         }
 
-        enlistButton.setOnClickListener {
+        btnEnlist.setOnClickListener {
             lblCapacity.setTextColor(Color.BLACK)
             checkLocationPermission()
             if (createCourt()) {
@@ -56,7 +63,21 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        btnLogin.setOnClickListener {
+            login()
+        }
+
         checkLocationPermission()
+    }
+
+    private fun login() {
+        val providers = arrayListOf(
+            AuthUI.IdpConfig.EmailBuilder().build(),
+            AuthUI.IdpConfig.GoogleBuilder().build(),
+        )
+        startActivityForResult(
+            AuthUI.getInstance().createSignInIntentBuilder().setAvailableProviders(providers).build(), AUTH_REQUEST_CODE
+        )
     }
 
     @RequiresApi(Build.VERSION_CODES.M)
@@ -94,6 +115,25 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(this,
                         "Unable to update location without permission", Toast.LENGTH_LONG).show()
                 }
+            }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == RESULT_OK) {
+            if (requestCode == AUTH_REQUEST_CODE) {
+                user = FirebaseAuth.getInstance().currentUser
+                btnLogin.text = "Logout"
+                btnLogin.setOnClickListener {
+                    Toast.makeText(this, "${user!!.displayName} abgemeldet", Toast.LENGTH_LONG).show()
+                    user = null
+                    btnLogin.text = "Login"
+                    btnLogin.setOnClickListener {
+                        login()
+                    }
+                }
+                Toast.makeText(this, "User ${user.toString()} logged in", Toast.LENGTH_LONG).show()
             }
         }
     }

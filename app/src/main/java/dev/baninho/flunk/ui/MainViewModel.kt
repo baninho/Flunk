@@ -4,6 +4,7 @@ import android.content.ContentValues.TAG
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
 import dev.baninho.flunk.dto.Court
@@ -14,10 +15,18 @@ class MainViewModel: ViewModel() {
     private var _courts: MutableLiveData<ArrayList<Court>> = MutableLiveData<ArrayList<Court>>()
 
     fun saveCourt(court: Court) {
-        firestore.collection("courts")
-            .document()
-            .set(court)
-            .addOnSuccessListener { Log.d("Firebase", "document saved") }
+        val documentRef: DocumentReference
+
+        if (court.id.isBlank()) {
+            documentRef = firestore.collection("courts").document()
+            court.id = documentRef.id
+        } else {
+            documentRef = firestore.collection("courts").document(court.id)
+        }
+
+        documentRef.set(court)
+            .addOnSuccessListener { Log.d("Firebase",
+                "document saved. Players: ${court.players}/${court.capacity}") }
             .addOnFailureListener { Log.d("Firebase", "saveCourt failed") }
     }
 
@@ -54,5 +63,7 @@ class MainViewModel: ViewModel() {
 
     internal var courts: MutableLiveData<ArrayList<Court>>
     get() { return _courts }
-    set(value) { courts = value }
+    set(value) {
+        value.also { this.courts = it }
+    }
 }

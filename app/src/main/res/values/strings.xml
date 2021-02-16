@@ -12,4 +12,5 @@
     <string name="msgJoinCourtDialog">Hier mitspielen?</string>
     <string name="btnJoinText">Klar.</string>
     <string name="btnCancelJoinCourt">Jetzt nicht</string>
+    <string name="btnLoginText">Login</string>
 </resources>

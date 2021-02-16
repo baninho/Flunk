@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
         enlistButton.setOnClickListener {
             lblCapacity.setTextColor(Color.BLACK)
             checkLocationPermission()
-            if (saveCourt()) {
+            if (createCourt()) {
                 val intent = Intent(this, MapsActivity::class.java)
                 startActivity(intent)
             }
@@ -98,7 +98,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun saveCourt(): Boolean {
+    private fun createCourt(): Boolean {
         val capacity = lblCapacity.text.toString().toIntOrNull()
         if (capacity == null) {
             lblCapacity.setTextColor(Color.RED)

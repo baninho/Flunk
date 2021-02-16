@@ -56,16 +56,16 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         var maxLat = -90.0
         var minLng = 180.0
         var maxLng = -180.0
-        courts.forEach { court ->
-            if (court.isActive && court.latitude.isNotEmpty() && court.longitude.isNotEmpty()) {
-                val marker = MarkerOptions().position(LatLng(court.latitude.toDouble(), court.longitude.toDouble()))
-                marker.title(court.toString())
-                marker.snippet("${court.players}/${court.capacity} Spieler. Zum Beitreten klicken")
+        courts.forEach {
+            if (it.isActive && it.latitude.isNotEmpty() && it.longitude.isNotEmpty()) {
+                val marker = MarkerOptions().position(LatLng(it.latitude.toDouble(), it.longitude.toDouble()))
+                marker.title(it.toString())
+                marker.snippet("${it.players}/${it.capacity} Spieler. Zum Beitreten klicken")
                 if (minLat > marker.position.latitude) { minLat = marker.position.latitude }
                 if (maxLat < marker.position.latitude) { maxLat = marker.position.latitude }
                 if (minLng > marker.position.longitude) { minLng = marker.position.longitude }
                 if (maxLng < marker.position.longitude) { maxLng = marker.position.longitude }
-                mMap.addMarker(marker).tag = court
+                mMap.addMarker(marker).tag = it
             }
         }
         val bounds = LatLngBounds(LatLng(minLat, minLng), LatLng(maxLat, maxLng))

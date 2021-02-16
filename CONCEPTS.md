@@ -62,4 +62,8 @@ Jeder kann Flunkyballfelder in der App auf der Karte sehen. Wenn ein Spieler sic
 ***
 
 ### Behaviour
-- Als potenzieller Spieler beim Betreten eines Flunkyballfelds fragt mich die App, ob ich hier dem Spielfeld beitreten
+- Als Spieler beim (örtlichen) Betreten eines Flunkyballfelds (IRL) fragt mich die App, ob ich hier dem Spielfeld beitreten will (wenn noch Plätze frei sind), um mein aktuelles Spielfeld festzulegen und die Spielerzahl des Spielfelds zu verfolgen
+- Als Spieler kann ich einen Platz auf einem Flunkyballfeld reservieren, das sich etwas entfernt von mir befindet, um anzukündigen dass ich dort mitspielen möchte und bei meiner Ankunft ein Platz für mich frei ist
+- Als Ausrichter möchte ich angeben können, ob ein Ball, eine Flasche und Bier vorhanden sind oder mitgebracht werden müssen, damit sichergestellt werden kann, dass alle Voraussetzungen zum Spielen erfüllt sind
+- Als Spieler möchte ich angezeigt bekommen, ob ein Ball, eine Flasche und Bier vorhanden sind, damit ich ggf. nötiges Spielgerät mitbringe aber nicht unnötig Spielgerät mitnehme
+- Als spieler möchte ich angeben können, dass ich benötigtes Spielgerät mitbringe, um zu vermeiden, dass unnötig Spielgerät mehrfach mitgebracht wird

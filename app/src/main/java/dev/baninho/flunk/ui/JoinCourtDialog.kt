@@ -19,7 +19,7 @@ class JoinCourtDialog(private val marker: Marker) : DialogFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(this.requireActivity().application).create(MainViewModel::class.java)
+        viewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application).create(MainViewModel::class.java)
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {

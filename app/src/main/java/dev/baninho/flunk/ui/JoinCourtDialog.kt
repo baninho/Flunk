@@ -47,12 +47,13 @@ class JoinCourtDialog(private val marker: Marker) : DialogFragment() {
         court.players += 1
         viewModel.saveCourt(court)
 
-        // TODO: fix inconsistency
-
     }
 
     private fun cancelJoinCourt() {
 
+        /**
+         * TODO: Remove the toast. Is there even anything that needs to happen here?
+         */
         Toast.makeText(activity, "Cancelled join court", Toast.LENGTH_LONG).show()
 
     }

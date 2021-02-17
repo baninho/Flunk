@@ -4,11 +4,11 @@
     <string name="map_button_text">Map</string>
     <string name="capacityText">10</string>
     <string name="enlistButtonText">Spielfeld anmelden</string>
-    <string name="courtLongitudeText">9.528811643662427</string>
-    <string name="courtLatitudeText">53.14636780765989</string>
-    <string name="lblCap">Max. Players</string>
-    <string name="lblLat">Latitude</string>
-    <string name="lblLng">Longitude</string>
+    <string name="courtLongitudeText">Längengrad</string>
+    <string name="courtLatitudeText">Breitengrad</string>
+    <string name="lblCap">Max. Spielerzahl</string>
+    <string name="lblLat">Breitengrad</string>
+    <string name="lblLng">Längengrad</string>
     <string name="msgJoinCourtDialog">Hier mitspielen?</string>
     <string name="btnJoinText">Klar.</string>
     <string name="btnCancelJoinCourt">Jetzt nicht</string>
@@ -19,4 +19,8 @@
     <string name="btnLogoutText">Logout</string>
     <string name="msgStubLogout">" erfolgreich abgemeldet"</string>
     <string name="msgStubLogin">"Erfolgreich angemeldet als "</string>
+    <string name="descBannerImage">Banner</string>
+    <string name="hintCapacity">Maximale Spieleranzahl</string>
+    <string name="hintLongitude">Längengrad</string>
+    <string name="hintLatitude">Breitengrad</string>
 </resources>

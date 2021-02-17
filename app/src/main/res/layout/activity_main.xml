@@ -10,7 +10,7 @@
         android:id="@+id/imageView"
         android:layout_width="431dp"
         android:layout_height="201dp"
-        android:contentDescription="banner"
+        android:contentDescription="@string/descBannerImage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.534"
         app:layout_constraintStart_toStartOf="parent"
@@ -46,7 +46,8 @@
                 android:ems="10"
                 android:importantForAutofill="no"
                 android:inputType="number"
-                android:text="@string/capacityText" />
+                android:text="@string/capacityText"
+                android:hint="@string/hintCapacity"/>
         </LinearLayout>
 
         <LinearLayout
@@ -66,8 +67,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="@string/courtLongitudeText" />
+                android:inputType="numberDecimal"
+                android:text="@string/courtLongitudeText"
+                android:importantForAutofill="no"
+                android:hint="@string/hintLongitude"/>
         </LinearLayout>
 
         <LinearLayout
@@ -87,8 +90,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:inputType="textPersonName"
-                android:text="@string/courtLatitudeText" />
+                android:inputType="numberDecimal"
+                android:text="@string/courtLatitudeText"
+                android:importantForAutofill="no"
+                android:hint="@string/hintLatitude"/>
         </LinearLayout>
 
     </LinearLayout>

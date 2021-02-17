@@ -113,7 +113,7 @@ class MainActivity : AppCompatActivity() {
                 } else {
                     Log.d("Location", "Permission denied")
                     Toast.makeText(this,
-                        "Unable to update location without permission", Toast.LENGTH_LONG).show()
+                        resources.getText(R.string.msgNoLocationPermission), Toast.LENGTH_LONG).show()
                 }
             }
         }
@@ -124,16 +124,17 @@ class MainActivity : AppCompatActivity() {
         if (resultCode == RESULT_OK) {
             if (requestCode == AUTH_REQUEST_CODE) {
                 user = FirebaseAuth.getInstance().currentUser
-                btnLogin.text = "Logout"
+                btnLogin.text = resources.getText(R.string.btnLogoutText)
                 btnLogin.setOnClickListener {
-                    Toast.makeText(this, "${user!!.displayName} abgemeldet", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, user!!.displayName + resources.getText(R.string.msgStubLogout), Toast.LENGTH_LONG).show()
                     user = null
-                    btnLogin.text = "Login"
+                    btnLogin.text = resources.getText(R.string.btnLoginText)
                     btnLogin.setOnClickListener {
                         login()
                     }
                 }
-                Toast.makeText(this, "User ${user.toString()} logged in", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, resources.getText(R.string.msgStubLogin).toString()
+                        + user!!.displayName, Toast.LENGTH_LONG).show()
             }
         }
     }

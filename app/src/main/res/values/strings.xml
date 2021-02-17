@@ -15,4 +15,8 @@
     <string name="btnLoginText">Login</string>
     <string name="facebook_app_id">254782016175692</string>
     <string name="fb_login_protocol_scheme">fb254782016175692</string>
+    <string name="msgNoLocationPermission">Ohne Berechtigung für Ortungsdienste kannst du keine Spielfelder erstellen oder betreten</string>
+    <string name="btnLogoutText">Logout</string>
+    <string name="msgStubLogout">" erfolgreich abgemeldet"</string>
+    <string name="msgStubLogin">"Erfolgreich angemeldet als "</string>
 </resources>

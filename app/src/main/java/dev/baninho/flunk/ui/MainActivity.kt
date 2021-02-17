@@ -172,10 +172,10 @@ class MainActivity : AppCompatActivity() {
             latitude = lblLatitudeValue.text.toString()
             longitude = lblLongitudeValue.text.toString()
             isActive = true
-            playerCount = 1
+            playerCount = 0
             this.capacity = capacity
-            players.add(user!!.uid)
         }
+        user?.let { court.join(it) }
         mainViewModel.saveCourt(court)
         return court
     }

@@ -37,6 +37,7 @@ class JoinCourtDialog(private val marker: Marker) : DialogFragment() {
     }
 
     private fun joinCourt() {
+        // TODO: use Court.join(user)
         val court = marker.tag as Court
 
         // TODO: remove toast

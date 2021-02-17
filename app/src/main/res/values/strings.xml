@@ -24,4 +24,5 @@
     <string name="hintLongitude">Längengrad</string>
     <string name="hintLatitude">Breitengrad</string>
     <string name="msgNotLoggedIn">Um ein Spielfeld zu erstellen musst du angemeldet sein</string>
+    <string name="msgLoginFailed">Anmeldung fehlgeschlagen</string>
 </resources>

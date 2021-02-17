@@ -53,11 +53,11 @@ class MainViewModel: ViewModel() {
                 documents.forEach {
                     val court = it.toObject(Court::class.java)
                     if (court != null) {
-                        allCourts.add(court!!)
+                        allCourts.add(court)
                     }
                 }
                 _courts.value = allCourts
-            } // endif (snapshot!=null)
+            }
         }
     }
 

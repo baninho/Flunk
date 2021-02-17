@@ -23,7 +23,6 @@ class MainActivity : AppCompatActivity() {
     private var user: FirebaseUser? = null
     private val LOCATION_PERMISSION_REQUEST_CODE: Int = 2000
     private val AUTH_REQUEST_CODE: Int = 2002
-    private val playerCount: Int = 0
 
     private var mainViewModel: MainViewModel = MainViewModel()
     private var locationPermissionGranted: Boolean = false
@@ -147,6 +146,8 @@ class MainActivity : AppCompatActivity() {
                 }
                 Toast.makeText(this, resources.getText(R.string.msgStubLogin).toString()
                         + user!!.displayName, Toast.LENGTH_LONG).show()
+            } else {
+                Toast.makeText(this, resources.getText(R.string.msgLoginFailed).toString(), Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -171,8 +172,9 @@ class MainActivity : AppCompatActivity() {
             latitude = lblLatitudeValue.text.toString()
             longitude = lblLongitudeValue.text.toString()
             isActive = true
-            playerCount = playerCount
+            playerCount = 1
             this.capacity = capacity
+            players.add(user!!.uid)
         }
         mainViewModel.saveCourt(court)
         return court

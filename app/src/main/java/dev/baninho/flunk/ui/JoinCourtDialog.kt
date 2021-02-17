@@ -43,8 +43,8 @@ class JoinCourtDialog(private val marker: Marker) : DialogFragment() {
         Toast.makeText(activity, "Joined court ${marker.title}", Toast.LENGTH_LONG).show()
 
         // TODO: GPS check
-        Log.d("Players", "Player count: ${court.players}/${court.capacity}")
-        court.players += 1
+        Log.d("Players", "Player count: ${court.playerCount}/${court.capacity}")
+        court.playerCount += 1
         viewModel.saveCourt(court)
 
     }

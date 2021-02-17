@@ -23,8 +23,7 @@ class MainActivity : AppCompatActivity() {
     private var user: FirebaseUser? = null
     private val LOCATION_PERMISSION_REQUEST_CODE: Int = 2000
     private val AUTH_REQUEST_CODE: Int = 2002
-    private val playercount: Int = 0
-    private val userId: String = ""
+    private val playerCount: Int = 0
 
     private var mainViewModel: MainViewModel = MainViewModel()
     private var locationPermissionGranted: Boolean = false
@@ -55,11 +54,25 @@ class MainActivity : AppCompatActivity() {
         }
 
         btnEnlist.setOnClickListener {
+            // TODO: Move color change to some edit listener of capacity input field
             lblCapacity.setTextColor(Color.BLACK)
+
             checkLocationPermission()
-            if (createCourt()) {
-                val intent = Intent(this, MapsActivity::class.java)
-                startActivity(intent)
+
+            val capacity = lblCapacity.text.toString().toIntOrNull()
+
+            when {
+                capacity == null -> {
+                    lblCapacity.setTextColor(Color.RED)
+                }
+                user == null -> {
+                    Toast.makeText(this, resources.getText(R.string.msgNotLoggedIn), Toast.LENGTH_LONG).show()
+                }
+                else -> {
+                    createCourt(capacity)
+                    val intent = Intent(this, MapsActivity::class.java)
+                    startActivity(intent)
+                }
             }
         }
 
@@ -68,6 +81,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         checkLocationPermission()
+
+        if (user == null) {
+            login()
+        }
     }
 
     private fun login() {
@@ -126,12 +143,7 @@ class MainActivity : AppCompatActivity() {
                 user = FirebaseAuth.getInstance().currentUser
                 btnLogin.text = resources.getText(R.string.btnLogoutText)
                 btnLogin.setOnClickListener {
-                    Toast.makeText(this, user!!.displayName + resources.getText(R.string.msgStubLogout), Toast.LENGTH_LONG).show()
-                    user = null
-                    btnLogin.text = resources.getText(R.string.btnLoginText)
-                    btnLogin.setOnClickListener {
-                        login()
-                    }
+                    logout()
                 }
                 Toast.makeText(this, resources.getText(R.string.msgStubLogin).toString()
                         + user!!.displayName, Toast.LENGTH_LONG).show()
@@ -139,21 +151,30 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun createCourt(): Boolean {
-        val capacity = lblCapacity.text.toString().toIntOrNull()
-        if (capacity == null) {
-            lblCapacity.setTextColor(Color.RED)
-            return false
-        }
+    private fun logout() {
+        AuthUI.getInstance()
+            .signOut(this)
+            .addOnCompleteListener {
+                Toast.makeText(this, user!!.displayName + resources.getText(R.string.msgStubLogout), Toast.LENGTH_LONG).show()
+                user = null
+                btnLogin.text = resources.getText(R.string.btnLoginText)
+                btnLogin.setOnClickListener {
+                    login()
+                }
+            }
+    }
+
+    private fun createCourt(capacity: Int): Court {
         val court = Court().apply {
-            ownerId = userId
+            ownerId = user!!.uid
+            owner = user!!.displayName ?: ""
             latitude = lblLatitudeValue.text.toString()
             longitude = lblLongitudeValue.text.toString()
             isActive = true
-            players = playercount
+            playerCount = playerCount
             this.capacity = capacity
         }
         mainViewModel.saveCourt(court)
-        return true
+        return court
     }
 }

@@ -60,7 +60,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             if (it.isActive && it.latitude.isNotEmpty() && it.longitude.isNotEmpty()) {
                 val marker = MarkerOptions().position(LatLng(it.latitude.toDouble(), it.longitude.toDouble()))
                 marker.title(it.toString())
-                marker.snippet("${it.players}/${it.capacity} Spieler. Zum Beitreten klicken")
+                marker.snippet("${it.playerCount}/${it.capacity} Spieler. Zum Beitreten klicken")
                 if (minLat > marker.position.latitude) { minLat = marker.position.latitude }
                 if (maxLat < marker.position.latitude) { maxLat = marker.position.latitude }
                 if (minLng > marker.position.longitude) { minLng = marker.position.longitude }

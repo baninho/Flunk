@@ -26,7 +26,7 @@ class MainViewModel: ViewModel() {
 
         documentRef.set(court)
             .addOnSuccessListener { Log.d("Firebase",
-                "document saved. Players: ${court.players}/${court.capacity}") }
+                "document saved. Players: ${court.playerCount}/${court.capacity}") }
             .addOnFailureListener { Log.d("Firebase", "saveCourt failed") }
     }
 

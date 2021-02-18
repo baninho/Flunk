@@ -38,7 +38,10 @@ class MainActivity : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.M)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_main)
+
+        mainViewModel.user = this.user
 
         btnMap = findViewById(R.id.mapButton)
         btnEnlist = findViewById(R.id.enlistButton)

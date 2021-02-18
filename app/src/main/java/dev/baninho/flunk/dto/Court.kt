@@ -16,7 +16,8 @@ data class Court(var owner: String = "",
         return "$owner's Spielfeld "
     }
 
-    fun join(user: FirebaseUser): CourtJoinCode {
+    fun join(user: FirebaseUser?): CourtJoinCode {
+        if (user == null) return CourtJoinCode.NO_USER
         if (user.uid in players) return CourtJoinCode.PLAYER_ALREADY_JOINED
         if (playerCount == capacity) return CourtJoinCode.NO_PLAYER_CAPACITY_AVAILABLE
 
@@ -30,5 +31,6 @@ data class Court(var owner: String = "",
         JOIN_REQUEST_ACCEPTED,
         PLAYER_ALREADY_JOINED,
         NO_PLAYER_CAPACITY_AVAILABLE,
+        NO_USER,
     }
 }

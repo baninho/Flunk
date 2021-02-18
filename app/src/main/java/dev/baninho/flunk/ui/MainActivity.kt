@@ -81,9 +81,6 @@ class MainActivity : AppCompatActivity() {
 
         checkLocationPermission()
 
-        if (user == null) {
-            login()
-        }
     }
 
     private fun login() {

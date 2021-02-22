@@ -56,8 +56,7 @@ class MainFragment : Fragment() {
         mainViewModel.user = this.user
 
         binding.btnMap.setOnClickListener {
-            val intent = Intent(this.context, MapsActivity::class.java)
-            startActivity(intent)
+            (activity as MainActivity).onOpenMap()
         }
 
         binding.btnEnlist.setOnClickListener {

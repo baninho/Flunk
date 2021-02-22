@@ -25,4 +25,9 @@
     <string name="hintLatitude">Breitengrad</string>
     <string name="msgNotLoggedIn">Um ein Spielfeld zu erstellen musst du angemeldet sein</string>
     <string name="msgLoginFailed">Anmeldung fehlgeschlagen</string>
+    <string name="msgNotJoggedInJoin">Melde dich an, um einem Spielfeld beizutreten</string>
+    <string name="msgCourtFull">Das Spielfeld ist leider gerade voll belegt</string>
+    <string name="msgAlreadyJoined">Du bist hier schon als Spieler angemeldet!</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

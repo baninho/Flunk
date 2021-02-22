@@ -4,6 +4,7 @@ import android.content.ContentValues.TAG
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
@@ -13,6 +14,7 @@ class MainViewModel: ViewModel() {
 
     private var firestore: FirebaseFirestore = FirebaseFirestore.getInstance()
     private var _courts: MutableLiveData<ArrayList<Court>> = MutableLiveData<ArrayList<Court>>()
+    var user: FirebaseUser? = null
 
     fun saveCourt(court: Court) {
         val documentRef: DocumentReference

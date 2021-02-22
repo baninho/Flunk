@@ -7,7 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import com.google.android.gms.maps.model.Marker
 import dev.baninho.flunk.R
 import dev.baninho.flunk.dto.Court
@@ -15,11 +15,11 @@ import java.lang.IllegalStateException
 
 class JoinCourtDialog(private val marker: Marker) : DialogFragment() {
 
-    private lateinit var viewModel: MainViewModel
+    private lateinit var mainViewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(requireActivity().application).create(MainViewModel::class.java)
+        mainViewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
@@ -45,8 +45,21 @@ class JoinCourtDialog(private val marker: Marker) : DialogFragment() {
 
         // TODO: GPS check
         Log.d("Players", "Player count: ${court.playerCount}/${court.capacity}")
-        court.playerCount += 1
-        viewModel.saveCourt(court)
+        when (court.join(mainViewModel.user)) {
+            Court.CourtJoinCode.NO_USER -> {
+                Toast.makeText(activity, resources.getText(R.string.msgNotJoggedInJoin), Toast.LENGTH_LONG).show()
+            }
+            Court.CourtJoinCode.NO_PLAYER_CAPACITY_AVAILABLE -> {
+                Toast.makeText(activity, resources.getText(R.string.msgCourtFull), Toast.LENGTH_LONG).show()
+            }
+            Court.CourtJoinCode.PLAYER_ALREADY_JOINED -> {
+                Toast.makeText(activity, resources.getText(R.string.msgAlreadyJoined), Toast.LENGTH_LONG).show()
+            }
+            Court.CourtJoinCode.JOIN_REQUEST_ACCEPTED -> {
+                court.join(mainViewModel.user)
+            }
+        }
+        mainViewModel.saveCourt(court)
 
     }
 

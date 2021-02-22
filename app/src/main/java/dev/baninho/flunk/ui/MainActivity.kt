@@ -19,8 +19,10 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+
     internal fun onOpenMap() {
         supportFragmentManager.beginTransaction()
-            .replace(R.id.container, MapFragment(),).commitNow()
+            .replace(R.id.container, MapFragment(),)
+            .commitNow()
     }
 }

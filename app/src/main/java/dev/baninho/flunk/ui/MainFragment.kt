@@ -76,8 +76,7 @@ class MainFragment : Fragment() {
                 }
                 else -> {
                     createCourt(capacity)
-                    val intent = Intent(this.context, MapsActivity::class.java)
-                    startActivity(intent)
+                    (activity as MainActivity).onOpenMap()
                 }
             }
         }

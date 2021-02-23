@@ -54,10 +54,9 @@ class MapFragment : Fragment() {
                 if (mainViewModel.user == null) {
                     Toast.makeText(context, R.string.msgNotJoggedInJoin, Toast.LENGTH_LONG).show()
                 } else {
-                    val dialogFragment = when (court.requestJoinStatus(mainViewModel.user!!.uid)) {
-                        Court.CourtJoinCode.JOIN_OK -> JoinCourtDialog(it)
-                        Court.CourtJoinCode.PLAYER_ALREADY_JOINED -> LeaveCourtDialog(it)
-                        Court.CourtJoinCode.NO_PLAYER_CAPACITY_AVAILABLE -> JoinCourtDialog(it)
+                    val dialogFragment = when (mainViewModel.user!!.uid) {
+                        in court.players -> LeaveCourtDialog(it)
+                        else -> JoinCourtDialog(it)
                     }
                     dialogFragment.show(
                         requireActivity().supportFragmentManager,

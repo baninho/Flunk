@@ -195,7 +195,6 @@ class MainFragment : Fragment() {
             playerCount = 0
             this.capacity = capacity
         }
-        court.requestJoinStatus(mVM.user!!.uid)
         court.players.add(mVM.user!!.uid)
         court.playerCount += 1
         mVM.saveCourt(court)
@@ -211,6 +210,4 @@ class MainFragment : Fragment() {
             requestPermissions(permissionRequest, LOCATION_PERMISSION_REQUEST_CODE)
         }
     }
-
-
 }

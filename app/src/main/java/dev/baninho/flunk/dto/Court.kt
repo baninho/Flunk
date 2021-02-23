@@ -13,18 +13,4 @@ data class Court(var owner: String = "",
     override fun toString(): String{
         return "$owner's Spielfeld"
     }
-
-    fun requestJoinStatus(uid: String): CourtJoinCode {
-        return when {
-            uid in players -> CourtJoinCode.PLAYER_ALREADY_JOINED
-            playerCount == capacity -> CourtJoinCode.NO_PLAYER_CAPACITY_AVAILABLE
-            else -> CourtJoinCode.JOIN_OK
-        }
-    }
-
-    enum class CourtJoinCode {
-        JOIN_OK,
-        PLAYER_ALREADY_JOINED,
-        NO_PLAYER_CAPACITY_AVAILABLE,
-    }
 }

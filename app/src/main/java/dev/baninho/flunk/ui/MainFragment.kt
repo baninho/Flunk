@@ -188,7 +188,7 @@ class MainFragment : Fragment() {
             playerCount = 0
             this.capacity = capacity
         }
-        court.requestJoinStatus(mVM.user!!)
+        court.requestJoinStatus(mVM.user!!.uid)
         mVM.saveCourt(court)
         return court
     }

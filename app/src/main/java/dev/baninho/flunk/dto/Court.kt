@@ -1,7 +1,5 @@
 package dev.baninho.flunk.dto
 
-import com.google.firebase.auth.FirebaseUser
-
 data class Court(var owner: String = "",
                  var ownerId: String = "",
                  var latitude: String = "",
@@ -16,9 +14,9 @@ data class Court(var owner: String = "",
         return "$owner's Spielfeld"
     }
 
-    fun requestJoinStatus(user: FirebaseUser): CourtJoinCode {
+    fun requestJoinStatus(uid: String): CourtJoinCode {
         return when {
-            user.uid in players -> CourtJoinCode.PLAYER_ALREADY_JOINED
+            uid in players -> CourtJoinCode.PLAYER_ALREADY_JOINED
             playerCount == capacity -> CourtJoinCode.NO_PLAYER_CAPACITY_AVAILABLE
             else -> CourtJoinCode.JOIN_OK
         }

@@ -174,19 +174,22 @@ class MainFragment : Fragment() {
         }
     }
 
-    private fun createCourt(capacity: Int): Court {
-        // TODO: Check null asserted calls if they are acutally null asserted
+    private fun createCourt(capacity: Int): Court? {
+        // TODO: Check null asserted calls if they are actually null asserted
+        // this currently crashes
+        if (mainViewModel == null) return null
+        val mVM = mainViewModel as MainViewModel
         val court = Court().apply {
-            ownerId = mainViewModel!!.user!!.uid
-            owner = mainViewModel!!.user!!.displayName ?: ""
+            ownerId = mVM.user!!.uid
+            owner = mVM.user!!.displayName ?: ""
             latitude = binding.lblLatitudeValue.text.toString()
             longitude = binding.lblLongitudeValue.text.toString()
             isActive = true
             playerCount = 0
             this.capacity = capacity
         }
-        mainViewModel!!.user!!.let { court.join(it) }
-        mainViewModel!!.saveCourt(court)
+        court.join(mVM.user)
+        mVM.saveCourt(court)
         return court
     }
 

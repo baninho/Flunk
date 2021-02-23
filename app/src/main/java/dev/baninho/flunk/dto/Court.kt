@@ -13,7 +13,7 @@ data class Court(var owner: String = "",
                  var players: ArrayList<String> = ArrayList(),
 ) {
     override fun toString(): String{
-        return "$owner's Spielfeld "
+        return "$owner's Spielfeld"
     }
 
     fun join(user: FirebaseUser): CourtJoinCode {

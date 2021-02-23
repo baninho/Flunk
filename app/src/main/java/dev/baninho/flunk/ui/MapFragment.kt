@@ -19,11 +19,6 @@ import dev.baninho.flunk.R
 import dev.baninho.flunk.dto.Court
 import java.util.*
 
-/**
- * A simple [Fragment] subclass.
- * Use the [MapFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class MapFragment : Fragment() {
     private val padding: Int = 200
 

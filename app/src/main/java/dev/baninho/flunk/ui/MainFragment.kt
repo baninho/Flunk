@@ -20,6 +20,7 @@ import com.google.firebase.auth.FirebaseAuth
 import dev.baninho.flunk.R
 import dev.baninho.flunk.databinding.MainFragmentBinding
 import dev.baninho.flunk.dto.Court
+import dev.baninho.flunk.dto.UserInfo
 
 class MainFragment : Fragment() {
     private var mainViewModel: MainViewModel? = null
@@ -162,6 +163,12 @@ class MainFragment : Fragment() {
         if (resultCode == AppCompatActivity.RESULT_OK) {
             if (requestCode == AUTH_REQUEST_CODE) {
                 mainViewModel!!.user = FirebaseAuth.getInstance().currentUser
+                if (mainViewModel!!.getUserInfo(mainViewModel!!.user!!.uid) == null) {
+                    mainViewModel!!.saveUserInfo(
+                        UserInfo(mainViewModel!!.user!!.uid,
+                        mainViewModel!!.user!!.displayName.toString())
+                    )
+                }
                 binding.btnLogin.text = resources.getText(R.string.btnLogoutText)
                 binding.btnLogin.setOnClickListener {
                     logout()

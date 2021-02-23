@@ -163,10 +163,10 @@ class MainFragment : Fragment() {
         if (resultCode == AppCompatActivity.RESULT_OK) {
             if (requestCode == AUTH_REQUEST_CODE) {
                 mainViewModel!!.user = FirebaseAuth.getInstance().currentUser
-                if (mainViewModel!!.getUserInfo(mainViewModel!!.user!!.uid) == null) {
+                mainViewModel!!.syncUserInfo(mainViewModel!!.user!!.uid)
+                if (mainViewModel!!.userInfo == null) {
                     mainViewModel!!.saveUserInfo(
-                        UserInfo(mainViewModel!!.user!!.uid,
-                        mainViewModel!!.user!!.displayName.toString())
+                        UserInfo(mainViewModel!!.user!!.uid, mainViewModel!!.user!!.displayName.toString())
                     )
                 }
                 binding.btnLogin.text = resources.getText(R.string.btnLogoutText)

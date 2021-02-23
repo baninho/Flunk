@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -50,14 +51,20 @@ class MapFragment : Fragment() {
             updateMap()
             mMap.setOnInfoWindowClickListener {
                 val court = it.tag as Court
-                val dialogFragment = when (court.requestJoinStatus(mainViewModel.user!!.uid)) {
-                    Court.CourtJoinCode.JOIN_OK -> JoinCourtDialog(it)
-                    Court.CourtJoinCode.PLAYER_ALREADY_JOINED -> LeaveCourtDialog(it)
-                    Court.CourtJoinCode.NO_PLAYER_CAPACITY_AVAILABLE -> JoinCourtDialog(it)
+                if (mainViewModel.user == null) {
+                    Toast.makeText(context, R.string.msgNotJoggedInJoin, Toast.LENGTH_LONG).show()
+                } else {
+                    val dialogFragment = when (court.requestJoinStatus(mainViewModel.user!!.uid)) {
+                        Court.CourtJoinCode.JOIN_OK -> JoinCourtDialog(it)
+                        Court.CourtJoinCode.PLAYER_ALREADY_JOINED -> LeaveCourtDialog(it)
+                        Court.CourtJoinCode.NO_PLAYER_CAPACITY_AVAILABLE -> JoinCourtDialog(it)
+                    }
+                    dialogFragment.show(
+                        requireActivity().supportFragmentManager,
+                        "joinOrLeaveCourt"
+                    )
                 }
-                dialogFragment.show(requireActivity().supportFragmentManager, "joinOrLeaveCourt")
             }
-
         }
         return rootView
     }
@@ -91,6 +98,8 @@ class MapFragment : Fragment() {
                     mMap.addMarker(marker).tag = it
                 }
             }
+            if (minLat > maxLat) minLat = maxLat
+            if (minLng > maxLng) minLng = maxLng
             val bounds = LatLngBounds(LatLng(minLat, minLng), LatLng(maxLat, maxLng))
             val update: CameraUpdate = CameraUpdateFactory.newLatLngBounds(bounds, padding)
             mMap.moveCamera(update)

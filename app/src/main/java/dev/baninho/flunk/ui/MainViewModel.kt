@@ -16,6 +16,7 @@ class MainViewModel: ViewModel() {
     private var firestore: FirebaseFirestore = FirebaseFirestore.getInstance()
     private var _courts: MutableLiveData<ArrayList<Court>> = MutableLiveData<ArrayList<Court>>()
     var user: FirebaseUser? = null
+    var userInfo: UserInfo? = null
 
     init {
         firestore.firestoreSettings = FirebaseFirestoreSettings.Builder().build()
@@ -38,9 +39,11 @@ class MainViewModel: ViewModel() {
             .addOnFailureListener { Log.d("Firebase", "saveCourt failed") }
     }
 
-    fun getUserInfo(uid: String): UserInfo? {
-        return firestore.collection("users")
-            .document(uid).get().result.toObject(UserInfo::class.java)
+    fun syncUserInfo(uid: String) {
+        firestore.collection("users")
+            .document(uid).get().addOnSuccessListener { userInfo ->
+                this.userInfo = userInfo.toObject(UserInfo::class.java)
+            }
     }
 
     /*
@@ -70,7 +73,7 @@ class MainViewModel: ViewModel() {
     }
 
     fun saveUserInfo(userInfo: UserInfo) {
-        val documentRef: DocumentReference = firestore.collection("courts").document(userInfo.uid)
+        val documentRef: DocumentReference = firestore.collection("users").document(userInfo.uid)
 
         documentRef.set(userInfo)
             .addOnSuccessListener { Log.d("Firebase",

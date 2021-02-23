@@ -16,7 +16,7 @@ data class Court(var owner: String = "",
         return "$owner's Spielfeld"
     }
 
-    fun join(user: FirebaseUser): CourtJoinCode {
+    fun requestJoinStatus(user: FirebaseUser): CourtJoinCode {
         return when {
             user.uid in players -> CourtJoinCode.PLAYER_ALREADY_JOINED
             playerCount == capacity -> CourtJoinCode.NO_PLAYER_CAPACITY_AVAILABLE

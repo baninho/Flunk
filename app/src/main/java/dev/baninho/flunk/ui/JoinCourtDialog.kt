@@ -47,7 +47,7 @@ class JoinCourtDialog(private val marker: Marker) : DialogFragment() {
         if (mainViewModel.user == null) {
             Toast.makeText(activity, resources.getText(R.string.msgNotJoggedInJoin), Toast.LENGTH_LONG).show()
         } else {
-            when (court.join(mainViewModel.user!!)) {
+            when (court.requestJoinStatus(mainViewModel.user!!)) {
                 Court.CourtJoinCode.NO_PLAYER_CAPACITY_AVAILABLE -> {
                     Toast.makeText(
                         activity,

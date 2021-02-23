@@ -9,12 +9,18 @@ import com.google.firebase.firestore.DocumentReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
 import dev.baninho.flunk.dto.Court
+import dev.baninho.flunk.dto.UserInfo
 
 class MainViewModel: ViewModel() {
 
     private var firestore: FirebaseFirestore = FirebaseFirestore.getInstance()
     private var _courts: MutableLiveData<ArrayList<Court>> = MutableLiveData<ArrayList<Court>>()
     var user: FirebaseUser? = null
+
+    init {
+        firestore.firestoreSettings = FirebaseFirestoreSettings.Builder().build()
+        listenToCourts()
+    }
 
     fun saveCourt(court: Court) {
         val documentRef: DocumentReference
@@ -32,9 +38,9 @@ class MainViewModel: ViewModel() {
             .addOnFailureListener { Log.d("Firebase", "saveCourt failed") }
     }
 
-    init {
-        firestore.firestoreSettings = FirebaseFirestoreSettings.Builder().build()
-        listenToCourts()
+    fun getUserInfo(uid: String): UserInfo? {
+        return firestore.collection("users")
+            .document(uid).get().result.toObject(UserInfo::class.java)
     }
 
     /*
@@ -61,6 +67,15 @@ class MainViewModel: ViewModel() {
                 _courts.value = allCourts
             }
         }
+    }
+
+    fun saveUserInfo(userInfo: UserInfo) {
+        val documentRef: DocumentReference = firestore.collection("courts").document(userInfo.uid)
+
+        documentRef.set(userInfo)
+            .addOnSuccessListener { Log.d("Firebase",
+                "userInfo saved. uid: ${userInfo.uid}, Name: ${userInfo.name}") }
+            .addOnFailureListener { Log.d("Firebase", "saveUserInfo failed") }
     }
 
     internal var courts: MutableLiveData<ArrayList<Court>>

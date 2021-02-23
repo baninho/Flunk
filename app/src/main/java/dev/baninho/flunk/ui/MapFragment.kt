@@ -66,7 +66,7 @@ class MapFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        mainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        mainViewModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
         mainViewModel.courts.observe(viewLifecycleOwner, {
                 courts -> this.courts = courts
                 updateMap()

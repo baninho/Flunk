@@ -44,18 +44,29 @@ class JoinCourtDialog(private val marker: Marker) : DialogFragment() {
 
         // TODO: GPS check
         Log.d("Players", "Player count: ${court.playerCount}/${court.capacity}")
-        when (court.join(mainViewModel.user)) {
-            Court.CourtJoinCode.NO_USER -> {
-                Toast.makeText(activity, resources.getText(R.string.msgNotJoggedInJoin), Toast.LENGTH_LONG).show()
-            }
-            Court.CourtJoinCode.NO_PLAYER_CAPACITY_AVAILABLE -> {
-                Toast.makeText(activity, resources.getText(R.string.msgCourtFull), Toast.LENGTH_LONG).show()
-            }
-            Court.CourtJoinCode.PLAYER_ALREADY_JOINED -> {
-                Toast.makeText(activity, resources.getText(R.string.msgAlreadyJoined), Toast.LENGTH_LONG).show()
-            }
-            Court.CourtJoinCode.JOIN_REQUEST_ACCEPTED -> {
-                mainViewModel.saveCourt(court)
+        if (mainViewModel.user == null) {
+            Toast.makeText(activity, resources.getText(R.string.msgNotJoggedInJoin), Toast.LENGTH_LONG).show()
+        } else {
+            when (court.join(mainViewModel.user!!)) {
+                Court.CourtJoinCode.NO_PLAYER_CAPACITY_AVAILABLE -> {
+                    Toast.makeText(
+                        activity,
+                        resources.getText(R.string.msgCourtFull),
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+                Court.CourtJoinCode.PLAYER_ALREADY_JOINED -> {
+                    Toast.makeText(
+                        activity,
+                        resources.getText(R.string.msgAlreadyJoined),
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
+                Court.CourtJoinCode.JOIN_OK -> {
+                    court.players.add(mainViewModel.user!!.uid)
+                    court.playerCount += 1
+                    mainViewModel.saveCourt(court)
+                }
             }
         }
 

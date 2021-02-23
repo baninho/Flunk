@@ -47,18 +47,21 @@ class MapFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        var rootView = inflater.inflate(R.layout.fragment_map, container, false)
+        val rootView = inflater.inflate(R.layout.fragment_map, container, false)
         val mapFragment = childFragmentManager.findFragmentById(R.id.mapFragment) as SupportMapFragment
         mapFragment.getMapAsync {
             googleMap -> mMap = googleMap
-
-            mMap.setOnInfoWindowClickListener {
-                val joinDialogFragment = JoinCourtDialog(it)
-                joinDialogFragment.show(requireActivity().supportFragmentManager, "joinCourt")
-            }
-
             mapReady = true
             updateMap()
+            mMap.setOnInfoWindowClickListener {
+                val court = it.tag as Court
+                val dialogFragment = when (court.requestJoinStatus(mainViewModel.user!!.uid)) {
+                    Court.CourtJoinCode.JOIN_OK -> JoinCourtDialog(it)
+                    Court.CourtJoinCode.PLAYER_ALREADY_JOINED -> LeaveCourtDialog(it)
+                    Court.CourtJoinCode.NO_PLAYER_CAPACITY_AVAILABLE -> JoinCourtDialog(it)
+                }
+                dialogFragment.show(requireActivity().supportFragmentManager, "joinOrLeaveCourt")
+            }
 
         }
         return rootView
@@ -69,6 +72,7 @@ class MapFragment : Fragment() {
         mainViewModel = ViewModelProvider(requireActivity()).get(MainViewModel::class.java)
         mainViewModel.courts.observe(viewLifecycleOwner, {
                 courts -> this.courts = courts
+
                 updateMap()
         })
     }

@@ -30,4 +30,7 @@
     <string name="msgAlreadyJoined">Du bist hier schon als Spieler angemeldet!</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="msgLeaveCourtDialog">Spielfeld verlassen?</string>
+    <string name="btnLeaveText">Jo!</string>
+    <string name="btnCancelLeaveCourt">Noch nicht</string>
 </resources>

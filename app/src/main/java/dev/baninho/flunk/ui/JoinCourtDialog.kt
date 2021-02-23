@@ -26,10 +26,10 @@ class JoinCourtDialog(private val marker: Marker) : DialogFragment() {
             val builder = AlertDialog.Builder(it)
             builder.setMessage(R.string.msgJoinCourtDialog)
                 .setNegativeButton(R.string.btnJoinText, DialogInterface.OnClickListener {
-                    dialog, id -> this.joinCourt()
+                    _, _ -> this.joinCourt()
                 })
                 .setPositiveButton(R.string.btnCancelJoinCourt, DialogInterface.OnClickListener {
-                    dialog, id -> this.cancelJoinCourt()
+                    _, _ -> this.cancelJoinCourt()
                 })
             builder.create()
         } ?: throw IllegalStateException("Activity null")

@@ -73,7 +73,7 @@ class MainFragment : Fragment() {
                 capacity == null -> {
                     binding.lblCapacity.setTextColor(Color.RED)
                 }
-                mainViewModel!!.user == null -> {
+                mainViewModel?.user == null -> {
                     Toast.makeText(this.context, resources.getText(R.string.msgNotLoggedIn), Toast.LENGTH_LONG).show()
                 }
                 else -> {
@@ -182,22 +182,19 @@ class MainFragment : Fragment() {
     }
 
     private fun createCourt(capacity: Int): Court? {
-        // TODO: Check null asserted calls if they are actually null asserted
-        // this currently crashes
-        if (mainViewModel == null) return null
-        val mVM = mainViewModel as MainViewModel
+        // TODO: Maybe move this to MainViewModel
         val court = Court().apply {
-            ownerId = mVM.user!!.uid
-            owner = mVM.user!!.displayName ?: ""
+            ownerId = mainViewModel?.user!!.uid
+            owner = mainViewModel?.user!!.displayName ?: ""
             latitude = binding.lblLatitudeValue.text.toString()
             longitude = binding.lblLongitudeValue.text.toString()
             isActive = true
             playerCount = 0
             this.capacity = capacity
         }
-        court.players.add(mVM.user!!.uid)
+        court.players.add(mainViewModel?.user!!.uid)
         court.playerCount += 1
-        mVM.saveCourt(court)
+        mainViewModel?.saveCourt(court)
         return court
     }
 

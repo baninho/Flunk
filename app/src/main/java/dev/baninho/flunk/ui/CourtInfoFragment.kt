@@ -7,8 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import dev.baninho.flunk.R
+import dev.baninho.flunk.dto.Court
 
-class CourtInfoFragment : Fragment() {
+class CourtInfoFragment(val court: Court) : Fragment() {
 
     private lateinit var mainViewModel: MainViewModel
 
